@@ -1,13 +1,13 @@
 FROM node:16 AS build
 WORKDIR /app
-COPY package.json ./
-RUN npm install
+COPY package.json yarn.lock ./
+RUN yarn install
 COPY . .
-RUN npm run build
+RUN yarn build
 
 FROM node:16-alpine AS final
 WORKDIR /app
 COPY package.json ./
-RUN npm install --only=production
+RUN yarn install --prod
 COPY --from=build /app/dist ./dist
-CMD npm run start:prod
+CMD yarn start:prod
