@@ -3,10 +3,10 @@
 ## Installation
 
 ```bash
-1. Create .env file like .env.example
-2. $ git clone git@github.com:valek2412/fibonacci.git
-3. $ cd fibonacci
-4. $ yarn install
+1. $ git clone git@github.com:valek2412/fibonacci.git
+2. $ cd fibonacci
+3. $ yarn install
+4. Create .env file like .env.example
 ```
 
 ## Usage
