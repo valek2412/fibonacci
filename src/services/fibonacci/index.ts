@@ -9,7 +9,8 @@ import {
   OutputReceiveType, OutputReply,
   OutputReplyType
 } from "./schema";
-import {getFibonacci} from "./utils";
+
+import { getFibonacci } from "./utils";
 
 
 const fibonacci: FastifyPluginAsync = async (fastify) => {
@@ -32,10 +33,10 @@ const fibonacci: FastifyPluginAsync = async (fastify) => {
 
       const ticket = counter ? parseInt(counter) + 1 : 1;
       await redis.set("ticketsCounter", ticket);
-      reply.send({ ticket });
 
       const fibonacciResult = getFibonacci(number);
-      await redis.set(ticket, fibonacciResult);
+      await redis.set(`${ticket}`, fibonacciResult);
+      reply.send({ ticket });
     }
   );
 
@@ -51,7 +52,10 @@ const fibonacci: FastifyPluginAsync = async (fastify) => {
     },
     async (request, reply) => {
       const ticket = request.body.ticket;
-      const fibonacci = await redis.get(ticket);
+      const fibonacci = await redis.get(`${ticket}`);
+      if (!fibonacci) {
+        throw new Error("Ticket not found");
+      }
 
       reply.send({ fibonacci: fibonacci });
     }

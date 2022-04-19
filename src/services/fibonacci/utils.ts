@@ -1,12 +1,17 @@
-export const getFibonacci = (num: number): number => {
-  let a = 1, b = 0, temp;
+export const getFibonacci = (n: number): number => {
+  if (n == 0) return 0;
+  if (n == 1) return 1;
 
-  while (num >= 0){
-    temp = a;
-    a = a + b;
-    b = temp;
-    num--;
+  let prevPrev = 0;
+  let prev = 1;
+  let result = 0;
+
+  for (let i = 2; i <= n; i++)
+  {
+    result = prev + prevPrev;
+    prevPrev = prev;
+    prev = result;
   }
 
-  return b;
+  return result;
 };

@@ -4,20 +4,30 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node src/index.ts"
+    "start:dev": "nodemon index.ts",
+    "start:prod": "node dist/index.js NODE_ENV='production'",
+    "build": "tsc --build",
+    "test": "mocha -r ts-node/register 'tests/**/*.ts'"
   },
   "devDependencies": {
     "@types/node": "^17.0.25",
     "@typescript-eslint/eslint-plugin": "^5.20.0",
     "@typescript-eslint/parser": "^5.20.0",
+    "@types/chai": "^4.3.1",
+    "@types/mocha": "^9.1.0",
+    "chai": "^4.3.6",
     "eslint": "^8.13.0",
+    "nodemon": "^2.0.15",
     "ts-node": "^10.7.0",
     "tsc": "^2.0.4",
-    "typescript": "^4.6.3"
+    "typescript": "^4.6.3",
+    "mocha": "^9.2.2"
   },
   "dependencies": {
     "@sinclair/typebox": "^0.23.4",
     "fastify": "^3.28.0",
-    "fastify-redis": "^4.3.3"
+    "fastify-env": "^2.1.1",
+    "fastify-redis": "^4.3.3",
+    "ioredis": "^5.0.4"
   }
 }
